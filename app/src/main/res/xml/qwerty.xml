@@ -46,4 +46,8 @@
         <Key android:codes="46" android:keyLabel="." android:keyWidth="10%p"/>
         <Key android:codes="-4" android:keyLabel="return" android:keyWidth="30%p"/>
     </Row>
+    <Row>
+        <Key android:codes="-10" android:keyLabel="🌐" android:keyWidth="50%p"/>
+        <Key android:codes="-11" android:keyLabel="🎤" android:keyWidth="50%p"/>
+    </Row>
 </Keyboard>
