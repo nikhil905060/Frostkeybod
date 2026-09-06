@@ -7,6 +7,8 @@ import android.inputmethodservice.KeyboardView
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 
 class FrostKeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
 
@@ -19,6 +21,7 @@ class FrostKeyboardService : InputMethodService(), KeyboardView.OnKeyboardAction
         keyboard = Keyboard(this, R.xml.qwerty)
         keyboardView.keyboard = keyboard
         keyboardView.setOnKeyboardActionListener(this)
+        keyboardView.isPreviewEnabled = true
 
         val isDark = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                 Configuration.UI_MODE_NIGHT_YES
@@ -53,6 +56,13 @@ class FrostKeyboardService : InputMethodService(), KeyboardView.OnKeyboardAction
             }
             Keyboard.KEYCODE_MODE_CHANGE -> {
                 // Hook for a symbols/number layout swap; extend as needed.
+            }
+            -10 -> {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showInputMethodPicker()
+            }
+            -11 -> {
+                Toast.makeText(this, "Voice typing not set up yet", Toast.LENGTH_SHORT).show()
             }
             32 -> ic.commitText(" ", 1)
             else -> {
